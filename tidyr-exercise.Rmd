@@ -2,7 +2,7 @@
 title: "Tidy data and joins"
 author: Shreeram Senthivasan
 output:
-  html_document:
+  github_document:
     toc: true
     toc_depth: 2
 ---
@@ -34,11 +34,11 @@ FR_UK <- gapminder %>%
 ```{r reshape-table}
 FR_UK %>%
   kable(col.names = c("Year",
-                      "Life Expectancy\\n in France",  #The double \\n let's me add
-                      "Life Expectancy\\n in the UK")) #a linebreak to the title
+                      "Life Expectancy in France",
+                      "Life Expectancy in the UK"))
 ```
 
-Looks good, but it's hard to tell how life expectancy in the UK is changing relative to France. Let's use a scatterplot to get a better sense of this.
+Looks good, but it's hard to tell how life expectancy in the UK is changing relative to France. Let's use a path plot to get a better sense of this.
 
 ## Plot Data
 
@@ -56,7 +56,7 @@ Now it is clear that the UK used to have a slightly higher life expectancy, but 
 
 # Data Joining (Prompt #1)
 
-In this task, we want to build a dataset to compliment the `gapminder` set and consider different ways of joining these dataset... But that seems like a lot of effort for not much benefit. Instead, let's play with the `world.cities` dataset from the `maps` package.
+In this task, we want to build a dataset to compliment the `gapminder` set and consider different ways of joining these datasets... But that seems like a lot of effort for not much benefit. Instead, let's play with the `world.cities` dataset from the `maps` package.
 
 ```{r join}
 head(world.cities)
@@ -66,7 +66,7 @@ head(world.cities)
 
 Let's add the name of the capital city to the gapminder dataset using left/right joins. These joins keep all the rows from one side (here `gapminder`) and columns from both.
 
-```{r join-right}
+```{r join-right, message = F, warning = F}
 world.cities %>%
   filter(capital == 1) %>%
   select(country = country.etc, capital = name) %>%
@@ -78,7 +78,7 @@ world.cities %>%
 
 As you can see, we don't have city information for all countries in the `gapminder` set. If we want to drop those incomplete rows from the dataset, we can use an inner join instead:
 
-```{r join-inner}
+```{r join-inner, message = F, warning = F}
 world.cities %>%
   filter(capital == 1) %>%
   select(country = country.etc, capital = name) %>%
@@ -94,7 +94,7 @@ What if we just want to know which countries we are missing city information for
 
 What we would like to do is filter one dataset based on rows in another dataset. In some situations we might only want to keep rows of the first dataset that have matches in the second (in which case we would use a semi join). However, here we want to see which rows in `gapminder` do not have matches in `world.cities`. For that we need the `anti_join` function.
 
-```{r join-anti}
+```{r join-anti, message = F, warning = F}
 world.cities %>%
   filter(capital == 1) %>%
   select(country = country.etc) %>%

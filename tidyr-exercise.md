@@ -2,7 +2,7 @@
 title: "Tidy data and joins"
 author: Shreeram Senthivasan
 output:
-  html_document:
+  github_document:
     toc: true
     toc_depth: 2
 ---
@@ -31,28 +31,28 @@ FR_UK <- gapminder %>%
 ```r
 FR_UK %>%
   kable(col.names = c("Year",
-                      "Life Expectancy\\n in France",  #The double \\n let's me add
-                      "Life Expectancy\\n in the UK")) #a linebreak to the title
+                      "Life Expectancy in France",
+                      "Life Expectancy in the UK"))
 ```
 
 
 
-| Year| Life Expectancy\n in France| Life Expectancy\n in the UK|
-|----:|---------------------------:|---------------------------:|
-| 1952|                      67.410|                      69.180|
-| 1957|                      68.930|                      70.420|
-| 1962|                      70.510|                      70.760|
-| 1967|                      71.550|                      71.360|
-| 1972|                      72.380|                      72.010|
-| 1977|                      73.830|                      72.760|
-| 1982|                      74.890|                      74.040|
-| 1987|                      76.340|                      75.007|
-| 1992|                      77.460|                      76.420|
-| 1997|                      78.640|                      77.218|
-| 2002|                      79.590|                      78.471|
-| 2007|                      80.657|                      79.425|
+| Year| Life Expectancy in France| Life Expectancy in the UK|
+|----:|-------------------------:|-------------------------:|
+| 1952|                    67.410|                    69.180|
+| 1957|                    68.930|                    70.420|
+| 1962|                    70.510|                    70.760|
+| 1967|                    71.550|                    71.360|
+| 1972|                    72.380|                    72.010|
+| 1977|                    73.830|                    72.760|
+| 1982|                    74.890|                    74.040|
+| 1987|                    76.340|                    75.007|
+| 1992|                    77.460|                    76.420|
+| 1997|                    78.640|                    77.218|
+| 2002|                    79.590|                    78.471|
+| 2007|                    80.657|                    79.425|
 
-Looks good, but it's hard to tell how life expectancy in the UK is changing relative to France. Let's use a scatterplot to get a better sense of this.
+Looks good, but it's hard to tell how life expectancy in the UK is changing relative to France. Let's use a path plot to get a better sense of this.
 
 ## Plot Data
 
@@ -73,7 +73,7 @@ Now it is clear that the UK used to have a slightly higher life expectancy, but 
 
 # Data Joining (Prompt #1)
 
-In this task, we want to build a dataset to compliment the `gapminder` set and consider different ways of joining these dataset... But that seems like a lot of effort for not much benefit. Instead, let's play with the `world.cities` dataset from the `maps` package.
+In this task, we want to build a dataset to compliment the `gapminder` set and consider different ways of joining these datasets... But that seems like a lot of effort for not much benefit. Instead, let's play with the `world.cities` dataset from the `maps` package.
 
 
 ```r
@@ -103,15 +103,6 @@ world.cities %>%
   filter(year == 2007, continent == "Asia") %>% # Let's restrict our output to smaller subset
   select(country, capital, lifeExp) %>%
   kable(col.names = c("Country", "Capital City", "Life Expectancy in 2007"))
-```
-
-```
-## Joining, by = "country"
-```
-
-```
-## Warning: Column `country` joining character vector and factor, coercing
-## into character vector
 ```
 
 
@@ -165,15 +156,6 @@ world.cities %>%
   kable(col.names = c("Country", "Capital City", "Life Expectancy in 2007"))
 ```
 
-```
-## Joining, by = "country"
-```
-
-```
-## Warning: Column `country` joining character vector and factor, coercing
-## into character vector
-```
-
 
 
 |Country      |Capital City | Life Expectancy in 2007|
@@ -223,15 +205,6 @@ world.cities %>%
   filter(year == 2007) %>%
   select(-year) %>%
   kable(col.names = c("Country", "Continent", "Life Expectancy in 2007", "Population in 2007", "GDP per Capita in 2007"))
-```
-
-```
-## Joining, by = "country"
-```
-
-```
-## Warning: Column `country` joining factor and character vector, coercing
-## into character vector
 ```
 
 
